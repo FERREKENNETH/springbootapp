@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Custom Login</title>
+</head>
+<body>
+    <h1>Custom Login</h1>
+    <div th:if="${param.error}">
+        Credencials incorrectes
+    </div>
+    <div th:if="${param.logout}">
+        T'has desconnectat
+    </div>
+    <form th:action="@{/login}" method="post">
+        <div><label> Usuari : <input type="text" name="username"/> </label></div>
+        <div><label> Password: <input type="password" name="password"/> </label></div>
+        <div><input type="submit" value="Entrar (Sign in)"/></div>
+    </form>
+</body>
+</html>
