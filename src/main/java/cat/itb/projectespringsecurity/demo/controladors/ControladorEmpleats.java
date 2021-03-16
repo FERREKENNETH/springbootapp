@@ -14,6 +14,6 @@ public class ControladorEmpleats {
     @GetMapping("/empleats/list")
     public String llistar(Model model) {
         model.addAttribute("llistaEmpleats", serveiEmpleat.getEmpleats());
-        return "llistat"; //listat.html recojera los datos
+        return "llistat"; //listat.html recojera los datos del Model model
     }
 }

@@ -22,6 +22,7 @@ class ConfiguracioSeguretatWeb extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        //autenticacio
         auth
                 .inMemoryAuthentication()
                 .passwordEncoder(passwordEncoder())
@@ -30,13 +31,13 @@ class ConfiguracioSeguretatWeb extends WebSecurityConfigurerAdapter {
                 .roles("ADMIN");
     }
 
-
+    //autoritzacio
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        //"/inici", "llistat", "afegir"
+
         http
                 .authorizeRequests()
-                .antMatchers("/").permitAll()
+                .antMatchers("/", "/registre").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
