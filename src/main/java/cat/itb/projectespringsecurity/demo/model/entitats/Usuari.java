@@ -15,6 +15,6 @@ public class Usuari {
     public Usuari(String username, String password) {
         this.username = username;
         this.password = password;
-        this.rol = "USER";
+        this.rol = "USER"; //ADMIN O USER
     }
 }

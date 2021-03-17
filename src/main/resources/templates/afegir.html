@@ -1,10 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Afegir/Editar</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossOrigin="anonymous">
 </head>
 <body>
+<div class="container">
+
+    <div class="form-row mb-4 ">
+
+        <form
+                method="post"
+                action="#"
+                th:action="${empleatForm.id!=0}?@{/empleats/edit/submit}:@{/empleats/new/submit}"
+                th:object="${empleatForm}">
+            <!-- si el id == 0 new Empleat , si el id != 0 edit Empleat -->
+            <h1 th:text="${empleatForm.id!=0}?'Editar empleat': 'Nou empleat'">bla bla empleat</h1>
+            <div class="form-group">
+                <label> Id </label>
+                <input contenteditable="${empleatForm.id!=0}"
+                       type="text"
+                       id="id"
+                       placeholder="1"
+                       th:field="*{id}"
+                       th:attrappend="readonly=${empleatForm.id!=0}?'readonly':null"
+                       class="form-control ">
+            </div>
+            <div class="form-group">
+                <label> Nom </label>
+                <input type="text" id="nom" placeholder="Joan" th:field="*{nom}" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="email">Enter Email </label>
+                <input type="text" id="email" placeholder="Email joan@joan.com" th:field="*{email}" class="form-control">
+            </div>
+            <div class="form-group">
+                <label> Telèlfon </label>
+                <input type="text" id="telefon" placeholder="9369815115" th:field="*{telefon}" class="form-control">
+            </div>
+            <div class="form-group text-center" >
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Enviar</button>
+            </div>
+        </form>
+
+
+
+
+
+
+    </div>
+
+</div>
 
 </body>
 </html>
