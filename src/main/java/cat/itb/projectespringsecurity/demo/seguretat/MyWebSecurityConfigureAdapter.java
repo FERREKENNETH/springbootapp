@@ -23,7 +23,6 @@ class ConfiguracioSeguretatWeb extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         //autenticacio
