@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 //se utiliza en Canfiguracio extends WebSecurityConfigurerAdapter!!
 @Service
-public class DetailsServiceCustom implements UserDetailsService {
+public class MyUserDetailService implements UserDetailsService {
     @Autowired
     private ServeiUsuari serveiUsuari;
 
@@ -32,4 +32,5 @@ public class DetailsServiceCustom implements UserDetailsService {
         }
         return builder.build();
     }
+
 }

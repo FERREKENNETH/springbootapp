@@ -17,7 +17,7 @@ public class ControladorLogin {
 
 
     @GetMapping("/login")
-    public String login() {
+    public String login(Model model) {
         return "login";
     }
 
@@ -25,15 +25,12 @@ public class ControladorLogin {
     @GetMapping("/registre")
     public String registre(Model model) {
         model.addAttribute("userForm", new Usuari());
-        //model.addAttribute("repeatpassword", new String());
         return "registre";
     }
 
-    @PostMapping("registre/submit")
-    // empleatForm es el nombre del objeto que se recoje en el formulario  de afegir(.html)
-    //recoje el objeto Empleat por parametro, lo añade al array y redirije a list
+    @PostMapping("/registre/submit")
     public String submitUser(@ModelAttribute("userForm") Usuari u) {
         serveiUsuari.add(u);
-        return "redirect:/empleats/list"; //TODO: ver a donde redirigir
+        return "redirect:/empleats/list";
     }
 }

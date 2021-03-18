@@ -8,7 +8,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
@@ -16,29 +15,41 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 class ConfiguracioSeguretatWeb extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private DetailsServiceCustom detailsServiceCustom;
+    private MyUserDetailService myUserDetailService;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    @Bean
+    public MyUserDetailService userDetailsService() {
+        return new MyUserDetailService();
+    };
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         //autenticacio
-        auth
-                .inMemoryAuthentication()
+        auth.inMemoryAuthentication()
                 .passwordEncoder(passwordEncoder())
                 .withUser("kenneth")
                 .password(passwordEncoder().encode("kenneth"))
                 .roles("ADMIN");
+
+        auth.inMemoryAuthentication()
+                .passwordEncoder(passwordEncoder())
+                .withUser("b").password(passwordEncoder()
+                .encode("b"))
+                .roles("USER");
+
+
+        auth.userDetailsService(myUserDetailService).passwordEncoder(passwordEncoder());
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         //autoritzacio
-        http
-                .authorizeRequests()
+        http.authorizeRequests()
                 .antMatchers(
                         "/",
                         "/login",

@@ -17,4 +17,6 @@ public class Usuari {
         this.password = password;
         this.rol = "USER"; //ADMIN O USER
     }
+
+
 }
