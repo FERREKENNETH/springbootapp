@@ -9,9 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-//per fer autenticacio (con un servicio)
 
-//se utiliza en Canfiguracio extends WebSecurityConfigurerAdapter!!
 @Service
 public class MyUserDetailService implements UserDetailsService {
     @Autowired
@@ -19,14 +17,14 @@ public class MyUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Usuari u = serveiUsuari.consultaPerId(username);
-        User.UserBuilder builder = null;
+        Usuari u = serveiUsuari.getUserByUsername(username);
+        User.UserBuilder builder ;
         if (u != null) {
             builder = User.withUsername(username);
             builder.disabled(false);
             builder.password(u.getPassword());
-            //builder.authorities(new SimpleGrantedAuthority("ROLE_USER"));
-            builder.roles(u.getRol());//+ o - lo mismo que builder.authorities
+           //builder.authorities(new SimpleGrantedAuthority("ADMIN"));
+            builder.roles(u.getRol());
         } else {
             throw new UsernameNotFoundException("Usuari no trobat");
         }

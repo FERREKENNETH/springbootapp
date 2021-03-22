@@ -27,7 +27,7 @@ public class ServeiUsuari  {
 
     private List<Usuari> repositoriArrayList = new ArrayList<>();
 
-    public Usuari consultaPerId(String username) {
+    public Usuari getUserByUsername(String username) {
         Usuari user = null;
         for (Usuari u: repositoriArrayList){
             if (u.getUsername().equalsIgnoreCase(username)) {
@@ -39,7 +39,8 @@ public class ServeiUsuari  {
 
     //antes de añadir el usuario, cifrar el password
     public void add(Usuari u) {
-        //u.setPassword(passwordEncoder().encode(u.getPassword()));
+        u.setRol("USER");
+        u.setPassword(passwordEncoder().encode(u.getPassword()));
         repositoriArrayList.add(u);
     }
 
@@ -48,8 +49,8 @@ public class ServeiUsuari  {
     public void init() {
         repositoriArrayList.addAll(
                 Arrays.asList(
-                        new Usuari("a", passwordEncoder().encode("a"), "ADMIN"),
-                        new Usuari("b", passwordEncoder().encode("b"), "USER")
+                        new Usuari("admin", passwordEncoder().encode("admin"), "ADMIN"),
+                        new Usuari("user", passwordEncoder().encode("user"), "USER")
                 )
         );
     }

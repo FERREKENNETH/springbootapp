@@ -56,8 +56,8 @@ public class ControladorEmpleats {
         return "redirect:/empleats/list";
     }
 
-    @GetMapping("/empleats/eliminar")
-    public String eliminar(@RequestParam(value="id") int id) {
+    @GetMapping("/empleats/eliminar/{id}")
+    public String eliminar(@PathVariable(value="id") int id) {
         serveiEmpleat.deteleEmployee(id);
         return "redirect:/empleats/list";
     }

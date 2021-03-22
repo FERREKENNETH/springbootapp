@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org">
+<html lang="ca" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>Afegir/Editar</title>
@@ -8,6 +8,20 @@
 </head>
 <body>
 <div class="container">
+    <div sec:authorize="isAuthenticated()">
+        Authenticated as <span sec:authentication="name"></span>
+        <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
+            <input type="submit" value="Logout" />
+        </form>
+        <a href="javascript:document.logoutForm.submit()">Logout</a>
+
+    </div>
+
+    <div sec:authorize="!isAuthenticated()">
+        No Authenticated </br>
+        <a href="/login">Login</a><br/>
+        <a href="/registre">Registre</a>
+    </div>
 
     <div class="form-row mb-4 ">
 

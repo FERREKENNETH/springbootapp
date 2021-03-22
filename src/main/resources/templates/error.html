@@ -1,10 +1,35 @@
 <!DOCTYPE html>
-<html lang="ca" xmlns:th="http://www.thymeleaf.org">
+<html lang="ca" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>Error 404</title>
 </head>
 <body>
+
+<div sec:authorize="isAuthenticated()">
+    Authenticated as <span sec:authentication="name"></span>
+    <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
+        <input type="submit" value="Logout" />
+    </form>
+    <a class="btn btn-primary" href="javascript:document.logoutForm.submit()">Logout</a>
+
+</div>
+
+<div th:if="${param.error}">
+    Credencials incorrectes
+</div>
+<div th:if="${param.logout}">
+    T'has desconnectat
+</div>
+
+
+<div sec:authorize="!isAuthenticated()">
+    No Authenticated </br>
+    <a href="/login">Login</a><br/>
+    <a href="/registre">Registre</a>
+</div>
+
+
 <div th:if="${param.error}">
     Credencials incorrectes
 </div>

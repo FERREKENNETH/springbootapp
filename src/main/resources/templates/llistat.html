@@ -1,10 +1,27 @@
 <!DOCTYPE html>
-<html lang="ca" xmlns:th="http://www.thymeleaf.org">
+<html lang="ca" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>Llistat Empleats</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossOrigin="anonymous">
 </head>
-<body>
+<body class="container">
+<div sec:authorize="isAuthenticated()">
+    Authenticated as <span sec:authentication="name"></span>
+    <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
+        <input type="submit" value="Logout" />
+    </form>
+    <a class="btn btn-primary" href="javascript:document.logoutForm.submit()">Logout</a>
+
+</div>
+
+<div sec:authorize="!isAuthenticated()">
+    No Authenticated </br>
+    <a href="/login">Login</a><br/>
+    <a href="/registre">Registre</a>
+</div>
+
 <a href="/empleats/list/orderbyname">Ordenar empleats per nom</a>
 <table>
     <thead>
@@ -27,7 +44,7 @@
         <td th:text="${emp.telefon}">123456789</td>
         <td th:text="${emp.esDirectiu}">true</td>
         <td><a th:href="@{/empleats/edit/{id}(id=${emp.id})}">Editar</a> </td>
-        <td><a th:href="@{/empleats/eliminar(id=${emp.id})}">Eliminar</a> </td>
+        <td><a th:href="@{/empleats/eliminar/{id}(id=${emp.id})}">Eliminar</a> </td>
         <br/>
 
     </tr>
