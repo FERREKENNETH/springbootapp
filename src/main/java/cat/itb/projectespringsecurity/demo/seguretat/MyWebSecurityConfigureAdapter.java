@@ -27,7 +27,7 @@ class ConfiguracioSeguretatWeb extends WebSecurityConfigurerAdapter {
         return new MyUserDetailService();
     };
 
-    @Override
+    /*@Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         //autenticacio
         auth.inMemoryAuthentication()
@@ -38,13 +38,19 @@ class ConfiguracioSeguretatWeb extends WebSecurityConfigurerAdapter {
 
         auth.inMemoryAuthentication()
                 .passwordEncoder(passwordEncoder())
-                .withUser("b").password(passwordEncoder()
-                .encode("b"))
+                .withUser("b")
+                .password(passwordEncoder().encode("b"))
                 .roles("USER");
 
 
         auth.userDetailsService(myUserDetailService).passwordEncoder(passwordEncoder());
+    }*/
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception{
+        auth.userDetailsService(myUserDetailService)
+                .passwordEncoder(passwordEncoder());
     }
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
