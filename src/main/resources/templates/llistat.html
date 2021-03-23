@@ -21,24 +21,31 @@
     <a href="/login">Login</a><br/>
     <a href="/registre">Registre</a>
 </div>
+<div class="row">
+    <div class="col-12">
+        <a href="/empleats/list/orderbyname">Ordenar empleats per nom</a>
+    </div>
+    <div class="col-12">
+        <a href="/">Anar a la pagina principal</a>
+    </div>
+</div>
 
-<a href="/empleats/list/orderbyname">Ordenar empleats per nom</a>
-<table>
+<table class="table">
     <thead>
     <tr>
-        <th>ID</th>
-        <th>Nom</th>
-        <th>Email</th>
-        <th>Telèfon</th>
-        <th>Es directiu</th>
-        <th>Editar</th>
-        <th>Eliminar</th>
+        <th scope="col">#</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Email</th>
+        <th scope="col">Telèfon</th>
+        <th scope="col">Es directiu</th>
+        <th scope="col">Editar</th>
+        <th scope="col">Eliminar</th>
 
     </tr></br>
     </thead>
     <tbody>
     <tr th:each="emp : ${llistaEmpleats}">
-        <td th:text="${emp.id}">ID</td>
+        <td th:text="${emp.id}" scope="row">ID</td>
         <td th:text="${emp.nom}">Pepe Pérez</td>
         <td th:text="${emp.email}">pepe.perez@ole.com</td>
         <td th:text="${emp.telefon}">123456789</td>

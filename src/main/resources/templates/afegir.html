@@ -9,29 +9,36 @@
 <body>
 <div class="container">
     <div sec:authorize="isAuthenticated()">
-        Authenticated as <span sec:authentication="name"></span>
+        Hello, authenticated as <span sec:authentication="name"></span>
         <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
             <input type="submit" value="Logout" />
         </form>
-        <a href="javascript:document.logoutForm.submit()">Logout</a>
-
+        <a class="btn btn-primary" href="javascript:document.logoutForm.submit()">Logout</a>
     </div>
 
-    <div sec:authorize="!isAuthenticated()">
+    <div class="row">
+        <div class="col-12">
+            <a href="/empleats/list">Anar al llistat</a>
+        </div>
+        <div class="col-12">
+            <a href="/">Anar a la pagina principal</a>
+        </div>
+    </div>
+
+    <!--no entrara mai, es redirecciona a login<div sec:authorize="!isAuthenticated()">
         No Authenticated </br>
         <a href="/login">Login</a><br/>
         <a href="/registre">Registre</a>
-    </div>
+    </div>-->
 
     <div class="form-row mb-4 ">
 
-        <form
-                method="post"
+        <form   method="post"
                 action="#"
                 th:action="${empleatForm.id!=0}?@{/empleats/edit/submit}:@{/empleats/new/submit}"
                 th:object="${empleatForm}">
             <!-- si el id == 0 new Empleat , si el id != 0 edit Empleat -->
-            <h1 th:text="${empleatForm.id!=0}?'Editar empleat': 'Nou empleat'">bla bla empleat</h1>
+            <h1 th:text="${empleatForm.id!=0}?'Editar empleat': 'Nou empleat'">aquest text no es mostrara</h1>
             <div class="form-group">
                 <label> Id </label>
                 <input contenteditable="${empleatForm.id!=0}"

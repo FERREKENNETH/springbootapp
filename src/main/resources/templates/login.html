@@ -2,21 +2,45 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
     <title>Custom Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossOrigin="anonymous">
 </head>
 <body>
+<div class="container">
     <h1>Custom Login</h1>
-    <div th:if="${param.error}">
+    <div th:if="${param.error}" style="color: red">
         Credencials incorrectes
     </div>
     <div th:if="${param.logout}">
         T'has desconnectat
     </div>
-    <form th:action="@{/login}" method="post">
+    <!--<form th:action="@{/login}" method="post">
         <div><label> Usuari : <input type="text" name="username"/> </label></div>
         <div><label> Password: <input type="password" name="password"/> </label></div>
         <div><input type="submit" value="Entrar (Sign in)"/></div>
-    </form>
+    </form>-->
 
-<a href="/registre">Registre</a>
+
+    <form th:action="@{/login}" method="post">
+        <div class="form-group">
+            <label> Usuari </label>
+            <input type="text" name="username" class="form-control ">
+        </div>
+        <div class="form-group">
+            <label> Password </label>
+            <input type="password" name="password" class="form-control">
+        </div>
+
+        <div class="form-group text-center" >
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Sign in</button>
+        </div>
+    </form>
+    No tens un usuari? <a href="/registre">Registrar't !</a>
+</div>
+
+
+
+
+
 </body>
 </html>
